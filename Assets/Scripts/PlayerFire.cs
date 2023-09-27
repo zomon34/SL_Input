@@ -5,14 +5,13 @@ using UnityEngine;
 public class PlayerFire : MonoBehaviour
 {
     public GameObject laserPrefab;
-    public Transform staffHead;
+    public Transform staffHeadTransform;
+
+    public float fireRate = 0.5f;
+    public int bulletsToFire = 3;
+    public float bulletFireDelay = 0.01f;
 
     float timer;
-    public float fireRate = 0.5f;
-
-    public int bulletsToFire = 3;
-
-    public float bulletFireDelay = 0.01f;
 
     public AudioClip[] laserAudio;
     AudioSource audioSource;
@@ -31,35 +30,35 @@ public class PlayerFire : MonoBehaviour
         if (Input.GetMouseButton(0) && timer >= fireRate)
         {
             timer = 0;
-            StartCoroutine(ShootBullets(bulletsToFire));
+            StartCoroutine(FireBullets(bulletsToFire));
         }
 
         timer += Time.deltaTime;
     }
 
-    IEnumerator ShootBullets(int numberOfBullets)
+    IEnumerator FireBullets(int numberOfBullets)
     {
         audioSource.pitch = Random.Range(0.75f, 1.25f);
         audioSource.Play();
 
         float playerZRotation = transform.eulerAngles.z;
-        Vector2 staffHeadPosition = staffHead.position;
+        Vector2 staffHeadPosition = staffHeadTransform.position;
 
         for (int i = 0; i < numberOfBullets; i++)
         {
             if (numberOfBullets % 2 != 0)
             {
-                Vector3 newRotation = GenerateRotationVector(i, playerZRotation, 3, -90);
+                Vector3 newRotation = GenerateBulletRotationVector(i, playerZRotation, 3, -90);
                 Instantiate(laserPrefab, staffHeadPosition, Quaternion.Euler(newRotation));
             }
             else
             {
-                Vector3 newRotation = GenerateRotationVector(i, playerZRotation, 3, -93);
+                Vector3 newRotation = GenerateBulletRotationVector(i, playerZRotation, 3, -93);
                 Instantiate(laserPrefab, staffHeadPosition, Quaternion.Euler(newRotation));
 
                 i++;
 
-                newRotation = GenerateRotationVector(i, playerZRotation, 3, -93);
+                newRotation = GenerateBulletRotationVector(i, playerZRotation, 3, -93);
                 Instantiate(laserPrefab, staffHeadPosition, Quaternion.Euler(newRotation));
             }
             
@@ -67,9 +66,9 @@ public class PlayerFire : MonoBehaviour
         }
     }
 
-    // TODO: decrease the amount of arguments this needs (not sure how yet)
+    // TODO: decrease the amount of arguments this needs (probably best solved with a new class)
     // Also add an explanation or make the code simpler for future me
-    Vector3 GenerateRotationVector(int i, float zRotation, float angleVariance, float baseZ)
+    Vector3 GenerateBulletRotationVector(int i, float zRotation, float angleVariance, float baseZ)
     {
         float mod = i * angleVariance * 2;
         if (i % 2 == 0)
