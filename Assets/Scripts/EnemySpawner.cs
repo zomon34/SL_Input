@@ -11,27 +11,27 @@ public class EnemySpawner : MonoBehaviour
     float circleArea = 10;
     float minDistance = 6;
 
-    int maxEnemies = 10;
+    int maxEnemies = 7;
     int deadEnemies = 0;
     int currentNumberOfEnemies = 0;
 
     void Start()
     {
-        //SpawnEnemy();
+        SpawnEnemy();
     }
 
     public void SpawnMoreEnemies()
     {
         player.gameObject.GetComponent<Movement>().points++;
-        //deadEnemies++;
+        deadEnemies++;
         currentNumberOfEnemies--;
         SpawnEnemy();
 
 
-        //for (int i = 0; i < deadEnemies; i++)
-        //{
-        //    SpawnEnemy();
-        //}
+        for (int i = 0; i < deadEnemies; i++)
+        {
+            SpawnEnemy();
+        }
     }
 
     void SpawnEnemy()
