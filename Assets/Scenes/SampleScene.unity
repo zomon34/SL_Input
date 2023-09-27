@@ -2106,8 +2106,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserPrefab: {fileID: 3276114664163045942, guid: 246e98b9ab745b8488e6f53813115a6c, type: 3}
-  staffHead: {fileID: 1154941337}
+  staffHeadTransform: {fileID: 1154941337}
+  fireRate: 0.5
   bulletsToFire: 3
+  bulletFireDelay: 0.01
   laserAudio:
   - {fileID: 8300000, guid: 028b2eb0eb8005f4cb1399157495b5ce, type: 3}
   - {fileID: 8300000, guid: a479fb3a5d29eb7448120b7edd6ac99f, type: 3}
