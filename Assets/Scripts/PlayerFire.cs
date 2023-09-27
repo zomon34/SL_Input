@@ -67,6 +67,8 @@ public class PlayerFire : MonoBehaviour
         }
     }
 
+    // TODO: decrease the amount of arguments this needs (not sure how yet)
+    // Also add an explanation or make the code simpler for future me
     Vector3 GenerateRotationVector(int i, float zRotation, float angleVariance, float baseZ)
     {
         float mod = i * angleVariance * 2;
