@@ -12,7 +12,6 @@ public class Movement : MonoBehaviour
     Vector2 velocity;
     Vector2 rawInput;
 
-
     Rigidbody2D rb;
 
     public float points = 0;
@@ -21,7 +20,6 @@ public class Movement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
         pointsText.text = "Points: 0";
     }
 
@@ -43,7 +41,7 @@ public class Movement : MonoBehaviour
             velocity *= maxSpeed;
         }
 
-        if (rawInput.x == 0 && rawInput.y == 0)
+        if (rawInput.sqrMagnitude == 0)
         {
             velocity *= 1 - deacceleration * Time.deltaTime;
         }
@@ -60,7 +58,5 @@ public class Movement : MonoBehaviour
             Destroy(other.gameObject);
             points++;
         }
-
     }
-
 }
