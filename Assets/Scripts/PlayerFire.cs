@@ -78,4 +78,48 @@ public class PlayerFire : MonoBehaviour
         }
         return new Vector3(0, 0, baseZ - i * 3 + mod + zRotation);
     }
+
+    class BulletVolley
+    {
+        // NOT FINISHED, no idea if this is even a reasonably solution, or if it's better
+        int numberOfBullets;
+        float playerZRotation;
+        float baseZ;
+        public List<BulletInVolley> bullets;
+
+
+        public BulletVolley(int numberOfBullets, float playerZRotation, float baseZ)
+        {
+            this.numberOfBullets = numberOfBullets;
+
+            for (int i = 0; i < numberOfBullets; i++)
+            {
+                BulletInVolley newBullet = new BulletInVolley(i, playerZRotation, baseZ);
+                bullets.Add(newBullet);
+            }
+        }
+
+    }
+
+    class BulletInVolley
+    {
+        int positionInVolley;
+        GameObject laserPrefab;
+        Vector3 rotationVector;
+
+        public BulletInVolley(int positionInVolley, float zRotation, float baseZ)
+        {
+            this.positionInVolley = positionInVolley;
+            rotationVector = GenerateRotationVector(positionInVolley, zRotation, baseZ);
+        }
+        private Vector3 GenerateRotationVector(int i, float zRotation, float baseZ)
+        {
+            float mod = i * 3 * 2;
+            if (i % 2 == 0)
+            {
+                mod = 3 * -1;
+            }
+            return new Vector3(0, 0, baseZ - i * 3 + mod + zRotation);
+        }
+    }
 }
