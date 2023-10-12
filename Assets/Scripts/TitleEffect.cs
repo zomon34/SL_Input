@@ -10,14 +10,12 @@ public class TitleEffect : MonoBehaviour
     public Image bgImage;
     public Image hpBarImage;
 
-    // Start is called before the first frame update
     void Start()
     {
         title.text = "Sekiro: Shadows Die Thrice";
         hpBarImage.fillAmount = 10;
     }
 
-    // Update is called once per frame
     void Update()
     {
         title.fontSize = 35 + Mathf.Sin(Time.time * 2) * 10;
